@@ -124,8 +124,7 @@ public class List12<E> implements List<E>
    */
   public Iterator<E> iterator()
   {
-    Iterator<E> iterNode = iterator();
-    return iterNode;
+    return new Iterator12();
   } 
 
   /**
@@ -357,14 +356,14 @@ public class List12<E> implements List<E>
   }
 
 /////////////////////// Iterator Interface ///////////////////////////////
-  public class Interator12 implements Iterator<E>
+  public class Iterator12 implements Iterator<E>
   {
     private Node<E> next;   // the Node next to be visited
     private Node<E> last;   // the Node last visited
     private Node<E> pred;   // the predecessor of last node
     private int expectedModCount = modCount; //copies the collection's mod count
 
-    public Interator12()
+    public Iterator12()
     {
       this.pred = null;     // predecessor of "last" node
       this.last = null;     // last node returned
