@@ -1,4 +1,4 @@
-public class TimeSimpleList
+public class TimeList
 {
   public static void main(String[] args)
   { 
