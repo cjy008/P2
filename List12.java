@@ -379,7 +379,7 @@ public class List12<E> implements List<E>
      */
     public boolean hasNext()
     {
-      if(this.next() != null)
+      if(next() != null)
       {
         return true;
       }
@@ -395,15 +395,16 @@ public class List12<E> implements List<E>
       E data = null;
       if(next.getSuccessor() == null)
         throw new NoSuchElementException();
-      if( expectedModCount != modCount)
-        throw new ConcurrentModificationException();
-      if(this.hasNext() == true)
+      while(last != null)
       {
-        this.pred = last;
-        this.last = next;
-        this.next = next.getSuccessor();
-        data = next.getData();
+        pred = last;
       }
+      //if(this.hasNext() == true)
+      //{ 
+      last = next;
+      next = next.getSuccessor();
+      data = next.getData();
+      //}
       return data;
     }
  
@@ -417,18 +418,16 @@ public class List12<E> implements List<E>
       {
         throw new IllegalStateException();
       }
-      if( expectedModCount != modCount)
-      {
-        throw new ConcurrentModificationException();
-      }
       if(pred != null) // Sets the pred's next to last's next; eliminates last
       {
-        pred.setSuccessor(last.getSuccessor());
+        pred.setSuccessor(next);
       }
       else
       {
-        pred.setSuccessor(last.getSuccessor());
+        head = next;
       }
+      last = null;
+      size--;
     }
   }
 }
